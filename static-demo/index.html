@@ -3,52 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="栖居 AI —— 居住空间分析与改造产品交互演示。">
+    <meta name="description" content="栖居 AI —— 从一张房间照片完成空间识别、诊断、决策与智能改造。">
     <meta name="theme-color" content="#edece5">
     <base href="/demo/">
-    <title>栖居 AI · 产品交互演示</title>
+    <title>栖居 AI · 空间分析与智能改造</title>
     <link rel="stylesheet" href="demo.css?v=20260811-2">
 </head>
 <body>
     <div class="grain" aria-hidden="true"></div>
-    <header class="site-header">
+    <header class="site-header landing-header">
         <a class="brand" href="#top" aria-label="栖居 AI 页首">
             <span class="brand-mark">栖</span>
             <span><b>栖居 AI</b><small>SPACE INTELLIGENCE</small></span>
         </a>
-        <div class="header-actions">
-            <div class="demo-badge"><i></i>案例与在线体验</div>
-            <a class="experience-link" href="/experience/">立即体验</a>
-        </div>
+        <nav class="landing-nav" aria-label="首页导航">
+            <a href="/#cases">案例</a>
+            <a href="/#about">产品逻辑</a>
+            <a class="experience-link" href="/experience/">开始体验</a>
+        </nav>
     </header>
 
     <main id="top">
-        <section class="hero">
-            <p class="eyebrow">FROM ONE PHOTO TO A BETTER ROOM</p>
-            <h1>看见空间问题，<br><em>也看见它的可能。</em></h1>
-            <p class="hero-copy">上传一张真实房间照片，AI 判断房间状态、分析居住体验，并生成可落地的空间改造方案。</p>
-            <div class="hero-actions">
-                <a class="experience-cta" href="/experience/">上传房间，开始真实体验 <span aria-hidden="true">→</span></a>
-                <a class="case-jump" href="#flowDemo">先看案例演示</a>
+        <section class="hero-v2">
+            <div class="hero-v2-copy">
+                <p class="eyebrow">AI SPACE DECISION SYSTEM</p>
+                <h1>看见空间问题，<br><em>也看见它的可能。</em></h1>
+                <p>栖居 AI 从一张真实房间照片出发，完成房间识别、空间诊断、改造决策与效果生成，让每个建议都有清楚的理由。</p>
+                <div class="hero-v2-actions">
+                    <a class="orange-cta" href="/experience/">开始体验 <span aria-hidden="true">→</span></a>
+                    <a href="/#flowDemo">查看交互演示</a>
+                </div>
             </div>
-            <div class="hero-meta">
-                <span>01 房间识别</span><span>02 空间分析</span><span>03 AI 改造</span>
+            <div id="heroCompare" class="hero-compare" style="--split: 50%">
+                <img class="compare-before" src="assets/flow-original.jpg" alt="改造前的卧室">
+                <div class="compare-after"><img src="assets/flow-result.png" alt="智能改造后的卧室"></div>
+                <span class="compare-label before">改造前</span>
+                <span class="compare-label after">改造后</span>
+                <div class="compare-divider" aria-hidden="true"><span>‹›</span></div>
+                <input id="heroCompareRange" type="range" min="0" max="100" value="50" aria-label="拖动查看改造前后对比">
             </div>
         </section>
 
-        <section class="video-showcase" aria-labelledby="videoTitle">
-            <div class="video-heading">
-                <div><p class="eyebrow">15-SECOND PRODUCT OVERVIEW</p><h2 id="videoTitle">15 秒看懂栖居 AI</h2></div>
-                <p>不拉长流程，只展示上传、分析、参数选择与改造结果四个关键动作。</p>
-            </div>
-            <div class="video-frame">
-                <video autoplay muted loop playsinline controls preload="metadata" poster="media/demo-poster.jpg" aria-label="栖居 AI 产品功能短视频">
-                    <source src="media/demo-short.webm" type="video/webm">
-                    <source src="media/demo-short.mp4" type="video/mp4">
-                    你的浏览器暂不支持视频播放。
-                </video>
-                <a href="/experience/">看完了，立即体验 <span aria-hidden="true">→</span></a>
-            </div>
+        <section class="process-strip" aria-label="产品工作流程">
+            <article><b>01</b><div><strong>Recognize</strong><span>识别房间要素</span></div></article>
+            <article><b>02</b><div><strong>Diagnose</strong><span>诊断空间问题</span></div></article>
+            <article><b>03</b><div><strong>Decide</strong><span>确定改造策略</span></div></article>
+            <article><b>04</b><div><strong>Generate</strong><span>生成改造方案</span></div></article>
         </section>
 
         <section id="flowDemo" class="flow-demo" hidden aria-labelledby="flowTitle">
@@ -103,7 +103,17 @@
             </div>
         </section>
 
-        <section class="demo-shell" aria-labelledby="demo-title">
+        <section id="about" class="decision-section" aria-labelledby="decisionTitle">
+            <div class="compact-heading"><span>AI DOESN'T JUST GENERATE. IT DECIDES.</span><h2 id="decisionTitle">从问题到方案，每一步都有依据</h2></div>
+            <div class="decision-grid">
+                <article><span>01</span><h3>问题识别</h3><p>判断采光、收纳、布局与色彩问题，先确认最影响居住体验的因素。</p><b>识别真实问题</b></article>
+                <article><span>02</span><h3>优先级</h3><p>根据房间状态与预算决定处理顺序，避免为了效果而过度改造。</p><b>控制改造范围</b></article>
+                <article><span>03</span><h3>解决方案</h3><p>把分析结果转成具体的家具布局、照明、收纳与软装建议。</p><b>输出可执行建议</b></article>
+                <article><span>04</span><h3>预算控制</h3><p>面积与预算进入生成条件，让最终效果与真实需求保持一致。</p><b>平衡效果与成本</b></article>
+            </div>
+        </section>
+
+        <section id="cases" class="demo-shell" aria-labelledby="demo-title">
             <aside class="case-rail">
                 <div class="section-kicker"><span>SELECT A CASE</span><b id="caseCount">00</b></div>
                 <h2 id="demo-title">选择案例</h2>

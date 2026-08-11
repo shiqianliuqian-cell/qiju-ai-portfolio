@@ -10,6 +10,14 @@ let currentView = 'original';
 let flowData = null;
 let flowTimers = [];
 
+const heroCompare = document.getElementById('heroCompare');
+const heroCompareRange = document.getElementById('heroCompareRange');
+if (heroCompare && heroCompareRange) {
+    heroCompareRange.addEventListener('input', event => {
+        heroCompare.style.setProperty('--split', `${event.target.value}%`);
+    });
+}
+
 function setText(id, value, fallback = '—') {
     document.getElementById(id).textContent = value || fallback;
 }
@@ -67,6 +75,10 @@ function renderFlowDemo(flow) {
     setText('flowSummary', flow.summary, '暂无分析摘要。');
     document.getElementById('flowOriginalImage').src = flow.images.original;
     document.getElementById('flowResultImage').src = flow.images.result;
+    const heroBefore = document.querySelector('.hero-compare .compare-before');
+    const heroAfter = document.querySelector('.hero-compare .compare-after img');
+    if (heroBefore) heroBefore.src = flow.images.original;
+    if (heroAfter) heroAfter.src = flow.images.result;
     const items = document.getElementById('flowAnalysisItems');
     items.replaceChildren();
     (Array.isArray(flow.analysis_items) ? flow.analysis_items : []).forEach(item => {
