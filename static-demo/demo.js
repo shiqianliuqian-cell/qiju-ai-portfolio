@@ -3,6 +3,7 @@ const caseStage = document.getElementById('caseStage');
 const emptyStage = document.getElementById('emptyStage');
 const caseCount = document.getElementById('caseCount');
 const viewTabs = document.getElementById('viewTabs');
+const demoShell = document.querySelector('.demo-shell');
 
 let cases = [];
 let currentCase = null;
@@ -244,7 +245,8 @@ function selectCase(caseItem) {
         advice.appendChild(listItem);
     });
     caseStage.hidden = false;
-    emptyStage.hidden = true;
+    if (emptyStage) emptyStage.hidden = true;
+    if (demoShell) demoShell.hidden = false;
     renderView();
     renderCaseList();
 }
@@ -269,7 +271,8 @@ async function initialize() {
     if (cases.length) selectCase(cases[0]);
     else {
         caseStage.hidden = true;
-        emptyStage.hidden = false;
+        if (emptyStage) emptyStage.hidden = false;
+        if (demoShell) demoShell.hidden = true;
         renderCaseList();
     }
 }
