@@ -42,6 +42,79 @@ function fillFlowSelect(select, values, placeholder) {
     });
 }
 
+function renderWorkbench(flow) {
+    const section = document.getElementById('productWorkbench');
+    if (!section || !flow?.enabled || !flow?.images?.original || !flow?.images?.result) {
+        if (section) section.hidden = true;
+        return;
+    }
+    section.hidden = false;
+    ['workbenchOriginal', 'workbenchBefore'].forEach(id => {
+        document.getElementById(id).src = flow.images.original;
+    });
+    document.getElementById('workbenchAfter').src = flow.images.result;
+    document.getElementById('workbenchScore').textContent = flow.score || '–';
+    document.getElementById('workbenchState').textContent = flow.room_state || '房间状态已识别';
+    document.getElementById('workbenchSummary').textContent = flow.summary || '空间分析已经完成。';
+
+    const area = document.getElementById('workbenchArea');
+    const budget = document.getElementById('workbenchBudget');
+    fillFlowSelect(area, flow.area_options, '请选择面积');
+    fillFlowSelect(budget, flow.budget_options, '请选择预算');
+    if (area.options.length > 1) area.selectedIndex = 1;
+    if (budget.options.length > 1) budget.selectedIndex = 1;
+
+    const metrics = document.getElementById('workbenchMetrics');
+    metrics.replaceChildren();
+    const metricScores = [72, 64, 78, 69];
+    (Array.isArray(flow.analysis_items) ? flow.analysis_items : []).slice(0, 4).forEach((item, index) => {
+        const row = document.createElement('div');
+        const label = document.createElement('span');
+        label.textContent = item.label;
+        const bar = document.createElement('i');
+        bar.style.setProperty('--value', `${metricScores[index] || 65}%`);
+        const score = document.createElement('b');
+        score.textContent = ((metricScores[index] || 65) / 10).toFixed(1);
+        row.append(label, bar, score);
+        metrics.appendChild(row);
+    });
+
+    const advice = document.getElementById('workbenchAdvice');
+    advice.replaceChildren();
+    (Array.isArray(flow.advice) ? flow.advice : []).slice(0, 3).forEach((item, index) => {
+        const li = document.createElement('li');
+        const number = document.createElement('span');
+        number.textContent = String(index + 1).padStart(2, '0');
+        const copy = document.createElement('p');
+        copy.textContent = item;
+        li.append(number, copy);
+        advice.appendChild(li);
+    });
+
+    if (section.dataset.bound) return;
+    section.dataset.bound = 'true';
+    const tabs = [...section.querySelectorAll('[data-workbench-tab]')];
+    const setStage = stage => {
+        tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.workbenchTab === String(stage)));
+        section.dataset.stage = String(stage);
+    };
+    tabs.forEach(tab => tab.addEventListener('click', () => setStage(tab.dataset.workbenchTab)));
+    document.getElementById('workbenchAnalyze').addEventListener('click', event => {
+        setStage(2);
+        section.classList.add('analyzed');
+        event.currentTarget.firstChild.textContent = '分析完成 ';
+    });
+    document.getElementById('workbenchGenerate').addEventListener('click', event => {
+        setStage(3);
+        section.classList.add('generated');
+        event.currentTarget.firstChild.textContent = '方案已生成 ';
+    });
+    const range = document.getElementById('workbenchRange');
+    range.addEventListener('input', event => {
+        document.getElementById('workbenchCompare').style.setProperty('--split', `${event.target.value}%`);
+    });
+}
+
 function resetFlowDemo() {
     clearFlowTimers();
     document.querySelectorAll('[data-flow-step]').forEach((step, index) => {
@@ -268,6 +341,7 @@ async function initialize() {
         cases = [];
     }
     renderFlowDemo(flow);
+    renderWorkbench(flow);
     if (cases.length) selectCase(cases[0]);
     else {
         caseStage.hidden = true;

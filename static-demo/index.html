@@ -18,7 +18,7 @@
         </a>
         <nav class="landing-nav" aria-label="首页导航">
             <a href="/#cases">案例</a>
-            <a href="/#about">产品逻辑</a>
+            <a href="/#productWorkbench">产品演示</a>
             <a class="experience-link" href="/experience/">开始体验</a>
         </nav>
     </header>
@@ -41,6 +41,61 @@
                 <span class="compare-label after">改造后</span>
                 <div class="compare-divider" aria-hidden="true"><span>‹›</span></div>
                 <input id="heroCompareRange" type="range" min="0" max="100" value="50" aria-label="拖动查看改造前后对比">
+            </div>
+        </section>
+
+        <section id="productWorkbench" class="product-workbench" hidden aria-labelledby="workbenchTitle">
+            <div class="workbench-heading">
+                <div><span>交互式产品演示</span><h2 id="workbenchTitle">体验 AI 如何改造你的空间</h2><p>通过一个预设房间，快速查看从识别、诊断到方案生成的完整过程。</p></div>
+                <div class="workbench-tabs" aria-label="演示步骤">
+                    <button class="active" type="button" data-workbench-tab="1"><b>01</b> 上传照片</button>
+                    <button type="button" data-workbench-tab="2"><b>02</b> 空间分析</button>
+                    <button type="button" data-workbench-tab="3"><b>03</b> 智能改造</button>
+                </div>
+            </div>
+            <div class="workbench-shell">
+                <div class="workbench-top">
+                    <article class="workbench-upload">
+                        <h3>上传房间照片</h3><p>预设案例图片，不会上传或调用收费接口。</p>
+                        <div class="workbench-photo"><img id="workbenchOriginal" alt="预设房间原图"><span>示例图片</span></div>
+                        <button id="workbenchAnalyze" type="button">开始分析 <span>→</span></button>
+                    </article>
+                    <article class="workbench-params">
+                        <h3>空间参数</h3>
+                        <label>房间面积<select id="workbenchArea"></select></label>
+                        <label>改造预算<select id="workbenchBudget"></select></label>
+                        <button id="workbenchGenerate" type="button">生成改造方案 <span>→</span></button>
+                    </article>
+                    <article class="workbench-score">
+                        <h3>分析结果预览</h3>
+                        <div class="workbench-score-number"><strong id="workbenchScore">–</strong><span>/ 10</span></div>
+                        <p>空间宜居性评分</p>
+                        <div id="workbenchMetrics" class="workbench-metrics"></div>
+                    </article>
+                    <article class="workbench-diagnosis">
+                        <h3>AI 初步诊断</h3>
+                        <strong id="workbenchState">房间状态识别中</strong>
+                        <p id="workbenchSummary"></p>
+                    </article>
+                </div>
+                <div class="workbench-bottom">
+                    <article class="workbench-advice"><h3>AI 决策建议</h3><p>基于空间分析结果给出优先改造策略。</p><ol id="workbenchAdvice"></ol></article>
+                    <article class="workbench-preview">
+                        <h3>AI 改造方案预览</h3>
+                        <div id="workbenchCompare" class="workbench-compare" style="--split: 50%">
+                            <img id="workbenchBefore" class="before" alt="改造前">
+                            <div class="after"><img id="workbenchAfter" alt="改造后"></div>
+                            <span class="label before-label">BEFORE</span><span class="label after-label">AFTER</span>
+                            <div class="divider" aria-hidden="true"><i>‹›</i></div>
+                            <input id="workbenchRange" type="range" min="0" max="100" value="50" aria-label="拖动查看方案前后对比">
+                        </div>
+                    </article>
+                    <article class="workbench-details">
+                        <h3>方案详情</h3>
+                        <dl><div><dt>空间保留</dt><dd>83%</dd></div><div><dt>改动项目</dt><dd>6 项</dd></div><div><dt>预计工期</dt><dd>1–2 天</dd></div></dl>
+                        <a href="/experience/">使用我的房间体验 <span>→</span></a>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -93,16 +148,6 @@
                         <p>保留原有门窗与空间结构，重点优化收纳、照明、家具布局和软装层次。</p>
                     </div>
                 </article>
-            </div>
-        </section>
-
-        <section id="about" class="decision-section" aria-labelledby="decisionTitle">
-            <div class="compact-heading"><span>FROM ONE PHOTO TO A BETTER ROOM</span><h2 id="decisionTitle">从识别、诊断到决策与生成</h2></div>
-            <div class="decision-grid">
-                <article><div class="decision-card-title"><span>01</span><div><strong>Recognize</strong><h3>问题识别</h3></div></div><p>判断采光、收纳、布局与色彩问题，先确认最影响居住体验的因素。</p><b>识别真实问题</b></article>
-                <article><div class="decision-card-title"><span>02</span><div><strong>Diagnose</strong><h3>空间诊断</h3></div></div><p>根据房间状态与预算决定处理顺序，避免为了效果而过度改造。</p><b>控制改造范围</b></article>
-                <article><div class="decision-card-title"><span>03</span><div><strong>Decide</strong><h3>解决方案</h3></div></div><p>把分析结果转成具体的家具布局、照明、收纳与软装建议。</p><b>输出可执行建议</b></article>
-                <article><div class="decision-card-title"><span>04</span><div><strong>Generate</strong><h3>方案生成</h3></div></div><p>面积与预算进入生成条件，让最终效果与真实需求保持一致。</p><b>平衡效果与成本</b></article>
             </div>
         </section>
 
