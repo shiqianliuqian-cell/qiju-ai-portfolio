@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="栖居 AI —— 居住空间分析与改造产品交互演示。">
+    <meta name="theme-color" content="#edece5">
+    <title>栖居 AI · 产品交互演示</title>
+    <link rel="stylesheet" href="demo.css?v=20260811-2">
+</head>
+<body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="栖居 AI 页首">
+            <span class="brand-mark">栖</span>
+            <span><b>栖居 AI</b><small>SPACE INTELLIGENCE</small></span>
+        </a>
+        <div class="demo-badge"><i></i>在线交互演示</div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <p class="eyebrow">FROM ONE PHOTO TO A BETTER ROOM</p>
+            <h1>看见空间问题，<br><em>也看见它的可能。</em></h1>
+            <p class="hero-copy">上传一张真实房间照片，AI 判断房间状态、分析居住体验，并生成可落地的空间改造方案。</p>
+            <div class="hero-meta">
+                <span>01 房间识别</span><span>02 空间分析</span><span>03 AI 改造</span>
+            </div>
+        </section>
+
+        <section id="flowDemo" class="flow-demo" hidden aria-labelledby="flowTitle">
+            <div class="flow-demo-heading">
+                <div>
+                    <p class="eyebrow">INTERACTIVE PRODUCT WALKTHROUGH</p>
+                    <h2 id="flowTitle"></h2>
+                    <p id="flowDescription"></p>
+                </div>
+                <button id="flowReset" class="flow-reset" type="button">重新体验</button>
+            </div>
+            <div class="flow-track" aria-label="空间改造分步演示">
+                <article class="flow-step flow-upload active" data-flow-step="upload">
+                    <header><span>01</span><div><small>UPLOAD</small><h3>上传房间</h3></div></header>
+                    <div class="flow-image-frame">
+                        <img id="flowOriginalImage" alt="预置房间原图">
+                        <span>预置演示图片</span>
+                    </div>
+                    <div class="flow-upload-meta"><span id="flowRoomState"></span><span>照片识别就绪</span></div>
+                    <button id="flowAnalyze" class="flow-primary" type="button">开始空间分析</button>
+                </article>
+
+                <article class="flow-step flow-analysis locked" data-flow-step="analysis">
+                    <header><span>02</span><div><small>ANALYZE</small><h3>分析与参数</h3></div></header>
+                    <div id="flowAnalysisLocked" class="flow-locked-copy"><i></i><p>完成照片分析后查看空间诊断</p></div>
+                    <div id="flowAnalysisContent" class="flow-analysis-content" hidden>
+                        <div class="flow-score"><span>空间评分</span><strong id="flowScore"></strong><small>/ 10</small></div>
+                        <p id="flowSummary" class="flow-summary"></p>
+                        <div id="flowAnalysisItems" class="flow-analysis-items"></div>
+                        <div class="flow-selects">
+                            <label>房间面积<select id="flowArea"><option value="">请选择面积</option></select></label>
+                            <label>改造预算<select id="flowBudget"><option value="">请选择预算</option></select></label>
+                        </div>
+                        <button id="flowGenerate" class="flow-primary" type="button" disabled>智能改造</button>
+                    </div>
+                </article>
+
+                <article class="flow-step flow-output locked" data-flow-step="output">
+                    <header><span>03</span><div><small>GENERATE</small><h3>智能改造结果</h3></div></header>
+                    <div id="flowOutputLocked" class="flow-locked-copy"><i></i><p>选择面积与预算后生成改造方案</p></div>
+                    <div id="flowGenerating" class="flow-generating" hidden>
+                        <div class="flow-progress"><span></span></div>
+                        <strong>AI 正在重构空间方案</strong>
+                        <small id="flowProgressText">分析家具与动线…</small>
+                    </div>
+                    <div id="flowOutputContent" class="flow-output-content" hidden>
+                        <div class="flow-image-frame result"><img id="flowResultImage" alt="智能改造结果图"></div>
+                        <div class="flow-result-meta"><span id="flowSelectedArea"></span><span id="flowSelectedBudget"></span></div>
+                        <p>保留原有门窗与空间结构，重点优化收纳、照明、家具布局和软装层次。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="demo-shell" aria-labelledby="demo-title">
+            <aside class="case-rail">
+                <div class="section-kicker"><span>SELECT A CASE</span><b id="caseCount">00</b></div>
+                <h2 id="demo-title">选择案例</h2>
+                <p>体验从房间识别到改造结果的完整产品流程。</p>
+                <div id="caseList" class="case-list" role="list"></div>
+                <div class="static-note">
+                    <b>演示说明</b>
+                    <p>本页使用预置案例展示真实产品逻辑，不会上传照片或调用收费 API。</p>
+                </div>
+            </aside>
+
+            <div id="caseStage" class="case-stage" hidden>
+                <div class="case-heading">
+                    <div><span id="caseTag"></span><h2 id="caseTitle"></h2></div>
+                    <div class="case-facts"><span id="caseArea"></span><span id="caseState"></span></div>
+                </div>
+
+                <div class="visual-card">
+                    <div id="viewTabs" class="view-tabs" role="tablist" aria-label="查看房间改造方案"></div>
+                    <figure>
+                        <img id="caseImage" alt="">
+                        <figcaption><span id="viewLabel"></span><b id="viewIndex"></b></figcaption>
+                    </figure>
+                </div>
+
+                <div class="report-grid">
+                    <article class="score-card">
+                        <span>LIVEABILITY SCORE</span>
+                        <div><strong id="caseScore"></strong><small>/ 10</small></div>
+                        <p>综合空间秩序、采光、家具布局与居住舒适度。</p>
+                    </article>
+                    <article class="analysis-card">
+                        <span>AI SPACE REPORT</span>
+                        <h3>空间分析</h3>
+                        <p id="caseSummary"></p>
+                    </article>
+                    <article class="advice-card">
+                        <span>ACTIONABLE ADVICE</span>
+                        <h3>改造建议</h3>
+                        <ol id="caseAdvice"></ol>
+                    </article>
+                </div>
+            </div>
+
+            <div id="emptyStage" class="empty-stage">
+                <span>DEMO CASES</span>
+                <h2>演示案例正在准备中</h2>
+                <p>请先在本地管理后台上传并启用至少一个案例。</p>
+            </div>
+        </section>
+
+        <section class="product-story">
+            <div><span>01</span><h3>准确识别</h3><p>过滤非房间图片，识别毛坯、无床等房间状态。</p></div>
+            <div><span>02</span><h3>可执行分析</h3><p>从真实居住体验出发，输出评分与具体行动建议。</p></div>
+            <div><span>03</span><h3>多路径改造</h3><p>支持 AI 智能改造与多个自定义风格方案，直观比较空间可能性。</p></div>
+        </section>
+    </main>
+
+    <footer><b>栖居 AI</b><span>产品交互演示 · Portfolio Edition</span></footer>
+    <script src="demo.js"></script>
+</body>
+</html>

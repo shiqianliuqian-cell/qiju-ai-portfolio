@@ -1,0 +1,95 @@
+{
+  "project": "栖居 AI",
+  "description": "居住空间分析与改造静态交互演示",
+  "updated_at": 1786389606391,
+  "items": [
+    {
+      "slot": 1,
+      "enabled": true,
+      "title": "出租屋1",
+      "tag": "卧室",
+      "room_area": "10-20㎡",
+      "state_label": "装修相对简单",
+      "score": "6",
+      "summary": "整洁度\n房间整体整洁，地面和床铺干净，但角落有少量杂物。\n\n家具布置\n家具布置简单实用，床和床头柜摆放合理，但空间利用率稍显不足。\n\n光线通风\n室内光线充足，主要来自天花板的照明灯，窗户采光良好，但窗帘遮挡部分自然光。\n\n色彩搭配\n色彩搭配简洁明快，蓝色床品与木质地板形成对比，墙面和窗帘色调柔和，整体视觉效果舒适。",
+      "advice": [
+        "增加一些绿植或装饰画，提升房间的温馨感和视觉层次。",
+        "考虑更换窗帘颜色或款式，使整体风格更活泼。",
+        "在床头柜上放置一盏台灯，增加局部照明和氛围感。",
+        "定期清理空调过滤网，保持空气清新。",
+        "可以添加一个小型地毯，增加舒适度和温暖感。"
+      ],
+      "images": {
+        "original": "assets/case-1-original.jpg",
+        "smart": "assets/case-1-smart.png"
+      },
+      "styles": []
+    },
+    {
+      "slot": 2,
+      "enabled": true,
+      "title": "出租屋2",
+      "tag": "卧室",
+      "room_area": "10-20㎡",
+      "state_label": "装修相对简单",
+      "score": "7",
+      "summary": "整洁度\n整体干净整洁，地面无明显杂物。\n\n家具布置\n家具布置简单实用，床和柜子摆放合理，但略显单调。\n\n光线通风\n自然光线充足，窗户采光良好，但室内灯光较暗。\n\n色彩搭配\n色彩搭配偏暖，粉色床单与木质家具形成柔和的视觉效果。",
+      "advice": [
+        "增加一些绿植或装饰品，提升空间的活力和温馨感。",
+        "考虑更换灯具，增加室内照明亮度。",
+        "在床头或窗边放置一个舒适的阅读角，增加功能性。",
+        "使用窗帘调节光线，避免过强阳光直射。",
+        "定期清理和整理物品，保持空间的整洁和有序。"
+      ],
+      "images": {
+        "original": "assets/case-2-original.png",
+        "smart": "assets/case-2-smart.png"
+      },
+      "styles": [
+        {
+          "id": "style-msnlahka-69tda",
+          "name": "现代简约",
+          "image": "assets/case-2-style-msnlahka-69tda.png"
+        },
+        {
+          "id": "style-msnlapf7-15mtl",
+          "name": "北欧风",
+          "image": "assets/case-2-style-msnlapf7-15mtl.png"
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "enabled": true,
+      "title": "出租屋3",
+      "tag": "卧室",
+      "room_area": "10㎡",
+      "state_label": "装修相对成熟，但是审美有待提示",
+      "score": "7.5",
+      "summary": "整洁度\n整体整洁，无明显杂物堆积。\n\n家具布置\n家具布局合理，但略显拥挤，空间利用率较高。\n\n光线通风\n自然光线充足，但室内灯光较暗，整体照明偏弱。\n\n色彩搭配\n墙面颜色柔和，搭配抱枕和地毯增加了层次感，整体色彩协调。",
+      "advice": [
+        "增加室内照明设备，如落地灯或台灯，提升夜间亮度。",
+        "考虑使用轻薄窗帘，既能保证隐私，又不影响采光。",
+        "在沙发旁增加一个小型绿植，增添生活气息。",
+        "优化床头区域的收纳空间，避免物品堆积。",
+        "尝试更换部分抱枕或添加挂画，丰富视觉效果。"
+      ],
+      "images": {
+        "original": "assets/case-3-original.png",
+        "smart": "assets/case-3-smart.png"
+      },
+      "styles": [
+        {
+          "id": "style-msnlw2pa-krde4",
+          "name": "现代简约",
+          "image": "assets/case-3-style-msnlw2pa-krde4.png"
+        },
+        {
+          "id": "style-msnlwaxs-0krqe",
+          "name": "日式风格",
+          "image": "assets/case-3-style-msnlwaxs-0krqe.png"
+        }
+      ]
+    }
+  ]
+}
