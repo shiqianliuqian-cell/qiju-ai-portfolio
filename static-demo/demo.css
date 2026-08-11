@@ -245,6 +245,10 @@ footer b { color: var(--ink); letter-spacing: .12em; }
 .radar-label.label-5 { top: 57px; left: -2px; }
 .workbench-analysis .workbench-metrics { margin-top: 0; }
 .workbench-analysis .workbench-metrics > div { grid-template-columns: 50px 1fr 22px; }
+.workbench-analysis .workbench-advice { margin-top: 20px; padding-top: 17px; border-top: 1px solid var(--line); }
+.workbench-analysis .workbench-advice h4 { margin: 0 0 7px; font-size: 11px; }
+.workbench-analysis .workbench-advice ol { margin: 0; }
+.workbench-analysis .workbench-advice li { padding: 9px 0; grid-template-columns: 26px 1fr; }
 .workbench-generation .workbench-compare { margin-top: 0; aspect-ratio: 16 / 10; }
 .workbench-generation .workbench-advice { margin-top: 17px; }
 .workbench-generation .workbench-advice h4 { margin: 0; font-size: 10px; }
