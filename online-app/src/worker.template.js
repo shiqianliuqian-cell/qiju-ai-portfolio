@@ -171,6 +171,7 @@ async function getSiteConfig(env) {
   if (!saved || typeof saved !== 'object') return DEFAULT_CONFIG;
   return {
     ...DEFAULT_CONFIG,
+    branding: saved.branding || DEFAULT_CONFIG.branding,
     analysis: saved.analysis || DEFAULT_CONFIG.analysis,
     optimization: saved.optimization || DEFAULT_CONFIG.optimization,
     prompt_prefixes: saved.prompt_prefixes || DEFAULT_CONFIG.prompt_prefixes,
@@ -290,6 +291,7 @@ function normalizeRoomAnalysis(result, config) {
 async function handlePublicConfig(env, context) {
   const config = await getSiteConfig(env);
   return json({
+    branding: config.branding || {},
     analysis: config.analysis || {},
     styles: config.styles || [],
     features: {item_analysis: false},
@@ -608,7 +610,15 @@ async function handleDemoContent(env, request, pathname) {
 
 function cleanSyncedConfig(config) {
   if (!config || typeof config !== 'object') throw new TypeError('网站配置无效');
+  const rawBranding = config.branding && typeof config.branding === 'object' ? config.branding : {};
+  const siteName = String(rawBranding.site_name || DEFAULT_CONFIG.branding?.site_name || '空间智改').trim().slice(0, 50);
+  const headerName = String(rawBranding.header_name || siteName).trim().slice(0, 50);
+  const logoUrl = String(rawBranding.logo_url || '').trim().slice(0, 500);
+  const logoPosition = rawBranding.logo_position === 'right' ? 'right' : 'left';
+  if (!siteName || !headerName) throw new TypeError('网站名称无效');
+  if (logoUrl && !(logoUrl.startsWith('https://') || logoUrl.startsWith('/'))) throw new TypeError('Logo 图片地址无效');
   return {
+    branding: {site_name: siteName, header_name: headerName, logo_url: logoUrl, logo_position: logoPosition},
     analysis: config.analysis || DEFAULT_CONFIG.analysis,
     optimization: config.optimization || DEFAULT_CONFIG.optimization,
     prompt_prefixes: config.prompt_prefixes || DEFAULT_CONFIG.prompt_prefixes,

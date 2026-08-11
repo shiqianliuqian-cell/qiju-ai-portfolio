@@ -21,6 +21,12 @@ button, a { font: inherit; }
 .site-header { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 24px 0; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; }
 .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 2px 12px 2px 2px; color: #fff; background: var(--ink); font-family: Georgia, serif; }
+.brand-mark img { width: 100%; height: 100%; display: block; object-fit: contain; border-radius: inherit; background: #fff; }
+.brand-mark img[hidden] { display: none; }
+.brand-mark.has-image { overflow: hidden; background: transparent; }
+.brand-mark.has-image > span { display: none; }
+.brand.logo-right .brand-mark { order: 2; }
+.brand.logo-right .brand-copy { order: 1; }
 .brand > span:last-child { display: grid; gap: 2px; }
 .brand b { font-size: 15px; letter-spacing: .12em; }
 .brand small { color: var(--muted); font-size: 8px; letter-spacing: .16em; }

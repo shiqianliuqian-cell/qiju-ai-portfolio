@@ -11,6 +11,34 @@ let currentView = 'original';
 let flowData = null;
 let flowTimers = [];
 
+function applyBranding(branding = {}) {
+    const siteName = branding.site_name || '空间智改';
+    const headerName = branding.header_name || siteName;
+    const logoUrl = branding.logo_url || '';
+    document.title = `${siteName} · 空间分析与智能改造`;
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.content = `${siteName}——从一张房间照片完成空间识别、诊断、决策与智能改造。`;
+    ['heroBrandName', 'ctaBrandName', 'footerBrandName'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = siteName;
+    });
+    const brand = document.getElementById('siteBrand');
+    const brandName = document.getElementById('siteBrandName');
+    const mark = document.getElementById('siteBrandMark');
+    const logo = document.getElementById('siteBrandLogo');
+    if (brand) {
+        brand.setAttribute('aria-label', `${headerName}页首`);
+        brand.classList.toggle('logo-right', branding.logo_position === 'right');
+    }
+    if (brandName) brandName.textContent = headerName;
+    if (mark && logo) {
+        mark.classList.toggle('has-image', Boolean(logoUrl));
+        logo.hidden = !logoUrl;
+        if (logoUrl) logo.src = logoUrl;
+        else logo.removeAttribute('src');
+    }
+}
+
 const heroCompare = document.getElementById('heroCompare');
 const heroCompareRange = document.getElementById('heroCompareRange');
 if (heroCompare && heroCompareRange) {
@@ -311,9 +339,10 @@ function selectCase(caseItem) {
 async function initialize() {
     let flow = null;
     try {
-        const [casesResponse, flowResponse] = await Promise.all([
+        const [casesResponse, flowResponse, configResponse] = await Promise.all([
             fetch('cases.json', {cache: 'no-store'}),
             fetch('flow.json', {cache: 'no-store'}),
+            fetch('/api/public-config', {cache: 'no-store'}),
         ]);
         if (!casesResponse.ok) throw new Error('cases unavailable');
         const data = await casesResponse.json();
@@ -321,6 +350,10 @@ async function initialize() {
             item?.enabled && item?.images?.original
         ));
         if (flowResponse.ok) flow = await flowResponse.json();
+        if (configResponse.ok) {
+            const publicConfig = await configResponse.json();
+            applyBranding(publicConfig.branding);
+        }
     } catch (_error) {
         cases = [];
     }

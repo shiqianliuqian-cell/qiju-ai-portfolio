@@ -103,6 +103,7 @@ async function fetchJson(url, options = {}) {
 async function loadConfig() {
     try {
         config = await fetchJson('/api/public-config');
+        applyBranding(config.branding);
         itemAnalysisEnabled = config.features?.item_analysis !== false;
         updateItemAnalysisVisibility();
         setExperienceAccess(config.experience_access);
@@ -110,6 +111,30 @@ async function loadConfig() {
         renderStyleList();
     } catch (error) {
         showError(`加载配置失败：${error.message}`);
+    }
+}
+
+function applyBranding(branding = {}) {
+    const siteName = branding.site_name || '空间智改';
+    const headerName = branding.header_name || siteName;
+    const logoUrl = branding.logo_url || '';
+    document.title = `${siteName} · 居住空间分析`;
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.content = `${siteName}，用一张照片获得专业的居住空间分析与优化建议。`;
+    const brand = document.getElementById('experienceBrand');
+    const brandName = document.getElementById('experienceBrandName');
+    const mark = document.getElementById('experienceBrandMark');
+    const logo = document.getElementById('experienceBrandLogo');
+    if (brand) {
+        brand.setAttribute('aria-label', `${headerName}首页`);
+        brand.classList.toggle('logo-right', branding.logo_position === 'right');
+    }
+    if (brandName) brandName.textContent = headerName;
+    if (mark && logo) {
+        mark.classList.toggle('has-image', Boolean(logoUrl));
+        logo.hidden = !logoUrl;
+        if (logoUrl) logo.src = logoUrl;
+        else logo.removeAttribute('src');
     }
 }
 

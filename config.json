@@ -1,4 +1,10 @@
 {
+  "branding": {
+    "site_name": "空间智改",
+    "header_name": "空间智改",
+    "logo_url": "",
+    "logo_position": "left"
+  },
   "api": {
     "base_url": "https://grsai.dakka.com.cn/v1/draw/nano-banana",
     "model": ""
