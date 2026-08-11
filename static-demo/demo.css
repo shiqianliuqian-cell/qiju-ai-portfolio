@@ -43,6 +43,16 @@ main { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 .case-jump { color: var(--ink); text-underline-offset: 4px; font-size: 11px; }
 .hero-meta { grid-column: 1 / -1; margin-top: 48px; padding-top: 18px; display: flex; gap: 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; letter-spacing: .08em; }
 
+.video-showcase { margin: 4px 0 84px; }
+.video-heading { margin-bottom: 22px; display: grid; grid-template-columns: 1fr .7fr; gap: 60px; align-items: end; }
+.video-heading .eyebrow { margin-bottom: 10px; }
+.video-heading h2 { margin: 0; font: 400 clamp(30px, 4vw, 48px)/1.15 Georgia, "Songti SC", serif; }
+.video-heading > p { margin: 0 0 3px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.video-frame { position: relative; overflow: hidden; border-radius: 3px 28px 3px 3px; background: #20251f; box-shadow: 0 28px 70px rgba(38,46,38,.14); }
+.video-frame video { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #20251f; }
+.video-frame > a { position: absolute; right: 18px; bottom: 18px; padding: 12px 16px; display: flex; align-items: center; gap: 28px; border-radius: 2px 11px 2px 2px; color: var(--ink); background: rgba(247,246,241,.94); text-decoration: none; font-size: 11px; font-weight: 700; box-shadow: 0 9px 24px rgba(20,25,21,.2); }
+.video-frame > a span { font-size: 18px; font-weight: 400; }
+
 .flow-demo { margin-bottom: 80px; }
 .flow-demo [hidden] { display: none !important; }
 .flow-demo-heading { margin-bottom: 24px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
@@ -163,6 +173,7 @@ footer b { color: var(--ink); letter-spacing: .12em; }
     .hero { padding: 58px 0; grid-template-columns: 1fr; gap: 28px; }
     .hero-actions { grid-column: 1; margin-top: 0; }
     .hero-meta { margin-top: 12px; overflow-x: auto; }
+    .video-heading { grid-template-columns: 1fr; gap: 14px; }
     .demo-shell { grid-template-columns: 1fr; }
     .case-rail { border-right: 0; border-bottom: 1px solid var(--line); }
     .case-list { grid-template-columns: repeat(3, minmax(190px, 1fr)); overflow-x: auto; }
@@ -183,6 +194,8 @@ footer b { color: var(--ink); letter-spacing: .12em; }
     .hero-actions { align-items: stretch; flex-direction: column; gap: 12px; }
     .experience-cta { min-width: 0; }
     .flow-demo { margin-bottom: 56px; }
+    .video-showcase { margin-bottom: 56px; }
+    .video-frame > a { right: 10px; bottom: 10px; padding: 9px 11px; gap: 14px; font-size: 9px; }
     .flow-demo-heading { align-items: flex-start; flex-direction: column; }
     .flow-analysis-items, .flow-selects { grid-template-columns: 1fr; }
     .case-stage { padding: 18px; }
