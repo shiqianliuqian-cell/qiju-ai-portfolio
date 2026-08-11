@@ -1,12 +1,20 @@
-# 栖居 AI · 空间改造作品集
+# 栖居 AI · 在线空间改造应用
 
-这是用于求职展示的静态作品集，包含空间分析、智能改造流程和多个改造案例。
+这是栖居 AI 的公开网站源码。首页提供房间识别、空间分析、面积与预算判断、智能改造和风格改造；`/demo/` 保留为作品案例页。
 
-## Cloudflare Pages 部署
+## 项目结构
 
-- 构建命令：留空
-- 构建输出目录：`/`
-- 生产分支：`main`
+- `index.html`、`style.css`、`script-proxy.js`：主网站
+- `static-demo/`：作品案例页
+- `online-app/`：Cloudflare Pages Functions、D1/KV 配置及构建脚本
 
-仓库内容均为静态文件，不包含本地管理后台、数据库或 API 密钥。
+## 构建与部署
 
+```bash
+cd online-app
+npm install
+npm run check
+npm run deploy
+```
+
+API 密钥、同步令牌和上传签名仅保存在 Cloudflare 加密变量中，不进入仓库。

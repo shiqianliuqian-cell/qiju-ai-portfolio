@@ -1,4 +1,8 @@
 .DS_Store
 Thumbs.db
 .wrangler/
-
+online-app/node_modules/
+online-app/dist/
+online-app/.functions-build/
+online-app/.dev.vars*
+online-app/.env*

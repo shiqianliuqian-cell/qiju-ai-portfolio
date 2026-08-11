@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "qiju-ai-portfolio",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-08-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "qiju-ai-online",
+      "database_id": "c3717537-9bd1-40a5-82dd-0bd15ca7ae18"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "CONTENT",
+      "id": "a526a0db601f45e99d9a3fdc04d93b70"
+    }
+  ],
+  "vars": {
+    "GENERATION_API_URL": "https://grsai.dakka.com.cn/v1/draw/nano-banana",
+    "GENERATION_STATUS_URL": "https://grsai.dakka.com.cn/v1/draw/result",
+    "ALIYUN_MODEL": "qwen-vl-plus"
+  }
+}
