@@ -5,8 +5,19 @@ const MAX_JSON_BYTES = 12 * 1024 * 1024;
 const MAX_PROVIDER_JSON_BYTES = 1024 * 1024;
 const VISITOR_COOKIE = 'qiju_visitor';
 const INVITE_COOKIE = 'qiju_invite';
-const ROOM_AREA_KEYS = new Set(['small', 'medium_small', 'medium', 'large', 'auto']);
-const BUDGET_KEYS = new Set(['0', 'low', 'mid', 'high']);
+const ROOM_AREA_PROMPT_KEYS = {
+  under_10: 'small',
+  '10_20': 'medium_small',
+  '20_30': 'medium',
+  over_30: 'large',
+  unknown: 'auto',
+};
+const BUDGET_PROMPT_KEYS = {
+  zero: '0',
+  under_500: 'low',
+  '500_2000': 'mid',
+  over_2000: 'high',
+};
 const VALID_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
 const ROOM_ANALYSIS_PROMPT = `请识别并分析这张居住空间照片。只返回一个合法 JSON 对象，不要使用 Markdown。
@@ -325,8 +336,10 @@ async function handleAnalyze(request, env, context) {
 function buildPrompt(config, styleId, roomArea, budget, budgetEnabled) {
   const prefixes = config.prompt_prefixes || {};
   const parts = [];
-  if (ROOM_AREA_KEYS.has(roomArea) && prefixes.area?.[roomArea]) parts.push(prefixes.area[roomArea]);
-  if (budgetEnabled && BUDGET_KEYS.has(budget) && prefixes.budget?.[budget]) parts.push(prefixes.budget[budget]);
+  const areaPromptKey = ROOM_AREA_PROMPT_KEYS[roomArea];
+  const budgetPromptKey = BUDGET_PROMPT_KEYS[budget];
+  if (areaPromptKey && prefixes.area?.[areaPromptKey]) parts.push(prefixes.area[areaPromptKey]);
+  if (budgetEnabled && budgetPromptKey && prefixes.budget?.[budgetPromptKey]) parts.push(prefixes.budget[budgetPromptKey]);
   if (styleId === 'smart') {
     parts.push(config.optimization?.smart_prompt || '保持原有房间结构与视角，优化布局、采光、收纳和软装。');
     return {prompt: parts.join('\n\n'), styleName: '智能优化'};
@@ -362,7 +375,7 @@ async function handleGenerate(request, env, context, url) {
   }
   const budgetEnabled = analysis ? Boolean(analysis.budget_enabled) : true;
   if (!budgetEnabled) budget = '';
-  const hasContext = ROOM_AREA_KEYS.has(roomArea) && (!budgetEnabled || BUDGET_KEYS.has(budget));
+  const hasContext = Boolean(ROOM_AREA_PROMPT_KEYS[roomArea]) && (!budgetEnabled || Boolean(BUDGET_PROMPT_KEYS[budget]));
   if (styleId !== 'smart' && !hasContext) {
     return apiError(budgetEnabled ? '请输入面积与预算' : '请选择面积');
   }
