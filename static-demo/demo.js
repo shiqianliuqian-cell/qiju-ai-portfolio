@@ -93,22 +93,6 @@ function renderWorkbench(flow) {
 
     if (section.dataset.bound) return;
     section.dataset.bound = 'true';
-    const tabs = [...section.querySelectorAll('[data-workbench-tab]')];
-    const setStage = stage => {
-        tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.workbenchTab === String(stage)));
-        section.dataset.stage = String(stage);
-    };
-    tabs.forEach(tab => tab.addEventListener('click', () => setStage(tab.dataset.workbenchTab)));
-    document.getElementById('workbenchAnalyze').addEventListener('click', event => {
-        setStage(2);
-        section.classList.add('analyzed');
-        event.currentTarget.firstChild.textContent = '分析完成 ';
-    });
-    document.getElementById('workbenchGenerate').addEventListener('click', event => {
-        setStage(3);
-        section.classList.add('generated');
-        event.currentTarget.firstChild.textContent = '方案已生成 ';
-    });
     const range = document.getElementById('workbenchRange');
     range.addEventListener('input', event => {
         document.getElementById('workbenchCompare').style.setProperty('--split', `${event.target.value}%`);

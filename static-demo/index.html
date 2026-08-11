@@ -46,42 +46,33 @@
 
         <section id="productWorkbench" class="product-workbench" hidden aria-labelledby="workbenchTitle">
             <div class="workbench-heading">
-                <div><span>交互式产品演示</span><h2 id="workbenchTitle">体验 AI 如何改造你的空间</h2><p>通过一个预设房间，快速查看从识别、诊断到方案生成的完整过程。</p></div>
-                <div class="workbench-tabs" aria-label="演示步骤">
-                    <button class="active" type="button" data-workbench-tab="1"><b>01</b> 上传照片</button>
-                    <button type="button" data-workbench-tab="2"><b>02</b> 空间分析</button>
-                    <button type="button" data-workbench-tab="3"><b>03</b> 智能改造</button>
-                </div>
+                <div><span>PRODUCT WALKTHROUGH</span><h2 id="workbenchTitle">AI 改造</h2><p>上传、分析与生成三个步骤并列展示，快速看懂完整产品流程。</p></div>
             </div>
             <div class="workbench-shell">
-                <div class="workbench-top">
-                    <article class="workbench-upload">
-                        <h3>上传房间照片</h3><p>预设案例图片，不会上传或调用收费接口。</p>
+                <div class="workbench-columns">
+                    <article class="workbench-column workbench-upload">
+                        <header class="workbench-step-title"><span>01</span><div><small>UPLOAD</small><h3>上传</h3></div></header>
                         <div class="workbench-photo"><img id="workbenchOriginal" alt="预设房间原图"><span>示例图片</span></div>
-                        <button id="workbenchAnalyze" type="button">开始分析 <span>→</span></button>
+                        <div class="workbench-params">
+                            <label>房间面积<select id="workbenchArea"></select></label>
+                            <label>改造预算<select id="workbenchBudget"></select></label>
+                        </div>
+                        <div class="workbench-room-state"><span>房间识别</span><strong id="workbenchState">房间状态识别中</strong></div>
                     </article>
-                    <article class="workbench-params">
-                        <h3>空间参数</h3>
-                        <label>房间面积<select id="workbenchArea"></select></label>
-                        <label>改造预算<select id="workbenchBudget"></select></label>
-                        <button id="workbenchGenerate" type="button">生成改造方案 <span>→</span></button>
+                    <article class="workbench-column workbench-analysis">
+                        <header class="workbench-step-title"><span>02</span><div><small>ANALYZE</small><h3>分析</h3></div></header>
+                        <div class="workbench-analysis-summary"><div class="workbench-score-number"><strong id="workbenchScore">–</strong><span>/ 10</span><small>空间宜居性评分</small></div><p id="workbenchSummary"></p></div>
+                        <div class="workbench-radar-wrap" aria-label="五维空间分析图">
+                            <div class="workbench-radar">
+                                <i class="grid grid-1"></i><i class="grid grid-2"></i><i class="grid grid-3"></i>
+                                <i class="axis axis-1"></i><i class="axis axis-2"></i><i class="axis axis-3"></i><i class="axis axis-4"></i><i class="axis axis-5"></i><b></b>
+                                <span class="radar-label label-1">整洁度</span><span class="radar-label label-2">采光</span><span class="radar-label label-3">布局</span><span class="radar-label label-4">舒适度</span><span class="radar-label label-5">色彩</span>
+                            </div>
+                            <div id="workbenchMetrics" class="workbench-metrics"></div>
+                        </div>
                     </article>
-                    <article class="workbench-score">
-                        <h3>分析结果预览</h3>
-                        <div class="workbench-score-number"><strong id="workbenchScore">–</strong><span>/ 10</span></div>
-                        <p>空间宜居性评分</p>
-                        <div id="workbenchMetrics" class="workbench-metrics"></div>
-                    </article>
-                    <article class="workbench-diagnosis">
-                        <h3>AI 初步诊断</h3>
-                        <strong id="workbenchState">房间状态识别中</strong>
-                        <p id="workbenchSummary"></p>
-                    </article>
-                </div>
-                <div class="workbench-bottom">
-                    <article class="workbench-advice"><h3>AI 决策建议</h3><p>基于空间分析结果给出优先改造策略。</p><ol id="workbenchAdvice"></ol></article>
-                    <article class="workbench-preview">
-                        <h3>AI 改造方案预览</h3>
+                    <article class="workbench-column workbench-generation">
+                        <header class="workbench-step-title"><span>03</span><div><small>GENERATE</small><h3>生成</h3></div></header>
                         <div id="workbenchCompare" class="workbench-compare" style="--split: 50%">
                             <img id="workbenchBefore" class="before" alt="改造前">
                             <div class="after"><img id="workbenchAfter" alt="改造后"></div>
@@ -89,10 +80,8 @@
                             <div class="divider" aria-hidden="true"><i>‹›</i></div>
                             <input id="workbenchRange" type="range" min="0" max="100" value="50" aria-label="拖动查看方案前后对比">
                         </div>
-                    </article>
-                    <article class="workbench-details">
-                        <h3>方案详情</h3>
-                        <dl><div><dt>空间保留</dt><dd>83%</dd></div><div><dt>改动项目</dt><dd>6 项</dd></div><div><dt>预计工期</dt><dd>1–2 天</dd></div></dl>
+                        <div class="workbench-advice"><h4>AI 决策建议</h4><ol id="workbenchAdvice"></ol></div>
+                        <div class="workbench-details"><dl><div><dt>空间保留</dt><dd>83%</dd></div><div><dt>改动项目</dt><dd>6 项</dd></div><div><dt>预计工期</dt><dd>1–2 天</dd></div></dl></div>
                         <a href="/experience/">使用我的房间体验 <span>→</span></a>
                     </article>
                 </div>
